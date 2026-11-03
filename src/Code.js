@@ -1,5 +1,15 @@
 /** @OnlyCurrentDoc */
 
+/**
+ * Detect non-SCELC emails in a comma-separated list
+ * @param {any} str - comma-separated list of emails
+ * @returns {boolean} - true if any email does not end with @scelc.org
+ */
+function EXTERNAL_EMAIL(str) {
+  const emails = str.split(", ")
+  return emails.some(email => !email.trim().endsWith("@scelc.org"))
+}
+
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('Folder hierarchy')
     .addItem('Create folder report…', 'promptFolderHierarchy').addToUi()

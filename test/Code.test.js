@@ -341,3 +341,15 @@ test('escapes double quotes in hyperlink URLs', () => {
   env.context.createFolderHierarchy('root', 0)
   assert.equal(env.formulas[0].values[0][0], '=HYPERLINK("https://drive.google.com/drive/folders/a""b", "link")')
 })
+
+test('EXTERNAL_EMAIL returns true for non-SCELC email addresses and false for SCELC addresses', () => {
+  const env = setup()
+  const EXTERNAL_EMAIL = env.context.EXTERNAL_EMAIL
+  assert.equal(EXTERNAL_EMAIL('user@cca.edu'), true)
+  assert.equal(EXTERNAL_EMAIL('user@scelc.org, user@cca.edu'), true)
+  assert.equal(EXTERNAL_EMAIL('user@scelc.org, user@cca.edu, user@scelc.org'), true)
+  assert.equal(EXTERNAL_EMAIL('user@cca.edu, user@scelc.org'), true)
+  assert.equal(EXTERNAL_EMAIL('user@cca.edu, user@scelc.org '), true) // trailing space
+  assert.equal(EXTERNAL_EMAIL('user@scelc.org'), false)
+  assert.equal(EXTERNAL_EMAIL('user@scelc.org, phette@scelc.org'), false)
+})

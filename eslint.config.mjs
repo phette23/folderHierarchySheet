@@ -15,6 +15,6 @@ export default [
       sourceType: 'script',
       globals: { DriveApp: 'readonly', SpreadsheetApp: 'readonly', LockService: 'readonly' },
     },
-    rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^(onOpen|promptFolderHierarchy|createFolderHierarchy)$' }] },
+    rules: { 'no-unused-vars': ['error', { varsIgnorePattern: '^(EXTERNAL_EMAIL|onOpen|promptFolderHierarchy|createFolderHierarchy)$' }] },
   },
 ]
